@@ -1,4 +1,4 @@
-{ lib, buildNimPackage, fetchFromGitHub }:
+{ lib, stdenv, buildNimPackage, fetchFromGitHub, Security }:
 
 buildNimPackage rec {
   pname = "tempfile";
@@ -17,4 +17,5 @@ buildNimPackage rec {
       maintainers = [ maintainers.ehmry ];
       mainProgram = "tempfile_seeder";
     };
+   buildInputs = lib.optional stdenv.isDarwin Security;
 }

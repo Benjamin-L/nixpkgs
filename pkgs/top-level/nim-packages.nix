@@ -1,4 +1,4 @@
-{ lib, pkgs, stdenv, newScope, nim, fetchFromGitHub, buildPackages }:
+{ lib, pkgs, stdenv, newScope, nim, darwin, fetchFromGitHub, buildPackages }:
 
 lib.makeScope newScope (self:
   let callPackage = self.callPackage;
@@ -116,7 +116,8 @@ lib.makeScope newScope (self:
 
     taps = callPackage ../development/nim-packages/taps { };
 
-    tempfile = callPackage ../development/nim-packages/tempfile { };
+    tempfile = callPackage ../development/nim-packages/tempfile
+                           { inherit (darwin) Security; };
 
     tkrzw = callPackage ../development/nim-packages/tkrzw { inherit (pkgs) tkrzw; };
 
