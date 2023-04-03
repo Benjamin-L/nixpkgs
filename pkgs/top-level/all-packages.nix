@@ -7047,7 +7047,8 @@ with pkgs;
     inherit (darwin.apple_sdk.frameworks) Carbon AppKit;
   };
 
-  tridactyl-native = callPackage ../tools/networking/tridactyl-native { };
+  tridactyl-native = callPackage ../tools/networking/tridactyl-native
+                                 { inherit (darwin) Security; };
 
   trivy = callPackage ../tools/admin/trivy { };
 
