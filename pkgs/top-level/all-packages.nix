@@ -10831,6 +10831,8 @@ with pkgs;
 
   opencc = callPackage ../tools/text/opencc { };
 
+  opencl-cts = callPackage ../tools/graphics/opencl-cts { };
+
   opencl-info = callPackage ../tools/system/opencl-info { };
 
   opencryptoki = callPackage ../tools/security/opencryptoki { };
