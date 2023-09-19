@@ -650,6 +650,8 @@ with pkgs;
 
   enumer = callPackage ../tools/misc/enumer { };
 
+  envytools = callPackage ../tools/graphics/envytools { };
+
   evans = callPackage ../development/tools/evans { };
 
   evhz = callPackage ../tools/misc/evhz { };

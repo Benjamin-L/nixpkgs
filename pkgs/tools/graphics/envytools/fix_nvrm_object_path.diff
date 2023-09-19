@@ -1,0 +1,13 @@
+diff --git a/demmt/main.c b/demmt/main.c
+index 551b54d5..bdb5a474 100644
+--- a/demmt/main.c
++++ b/demmt/main.c
+@@ -579,7 +579,7 @@ int main(int argc, char *argv[])
+ 	rnndec_varadd(gf100_shaders_ctx, "GF100_SHADER_KIND", "FP");
+ 
+ 	rnndb_nvrm_object = rnn_newdb();
+-	rnn_parsefile(rnndb_nvrm_object, "../docs/nvrm/rnndb/nvrm_object.xml");
++	rnn_parsefile(rnndb_nvrm_object, "../doc/envytools/hwdocs/nvrm_object.xml");
+ 	if (rnndb_nvrm_object->estatus)
+ 		demmt_abort();
+ 	rnn_prepdb(rnndb_nvrm_object);
