@@ -91,6 +91,12 @@ stdenv.mkDerivation (finalAttrs: {
     "-DWAYLAND_SCANNER=wayland-scanner"
   ];
 
+  # TODO: it seems to be building all the other targets in the install phase?
+  ninjaFlags = [
+    "deqp-vk"
+    "deqp-vksc"
+  ];
+
   postInstall = ''
     mv $out $lib
 
