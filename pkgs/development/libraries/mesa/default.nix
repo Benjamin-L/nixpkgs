@@ -252,12 +252,15 @@ self = stdenv.mkDerivation {
   '' + lib.optionalString stdenv.isLinux ''
     mkdir -p $drivers/lib
 
-    if [ -n "$(shopt -s nullglob; echo "$out/lib/libxatracker"*)" -o -n "$(shopt -s nullglob; echo "$out/lib/libvulkan_"*)" ]; then
-      # move gallium-related stuff to $drivers, so $out doesn't depend on LLVM
-      mv -t $drivers/lib       \
-        $out/lib/libpowervr_rogue* \
-        $out/lib/libxatracker* \
-        $out/lib/libvulkan_*
+    # move gallium-related stuff to $drivers, so $out doesn't depend on LLVM
+    if [ -n "$(shopt -s nullglob; echo "$out/lib/libpowervr_rogue"*)" ]; then
+      mv -t $drivers/lib $out/lib/libpowervr_rogue*
+    fi
+    if [ -n "$(shopt -s nullglob; echo "$out/lib/libxatracker"*)" ]; then
+      mv -t $drivers/lib $out/lib/libxatracker*
+    fi
+    if [ -n "$(shopt -s nullglob; echo "$out/lib/libvulkan_"*)" ]; then
+      mv -t $drivers/lib $out/lib/libvulkan_*
     fi
 
     if [ -n "$(shopt -s nullglob; echo "$out"/lib/lib*_mesa*)" ]; then
@@ -311,7 +314,12 @@ self = stdenv.mkDerivation {
 
     # Move development files for libraries in $drivers to $driversdev
     mkdir -p $driversdev/include
-    mv $dev/include/xa_* $dev/include/d3d* -t $driversdev/include || true
+    if [ -n "$(shopt -s nullglob; echo "$dev/include/xa_"*)" ]; then
+      mv -t $driversdev/include $dev/include/xa_*
+    fi
+    if [ -n "$(shopt -s nullglob; echo "$dev/include/d3d"*)" ]; then
+      mv -t $driversdev/include $dev/include/d3d*
+    fi
     mkdir -p $driversdev/lib/pkgconfig
     for pc in lib/pkgconfig/{xatracker,d3d}.pc; do
       if [ -f "$dev/$pc" ]; then
